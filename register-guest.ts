@@ -6,7 +6,7 @@ let guests: IGuest[] = [
   { id: 1, firstname: "Albert", lastname: "Einstein" }
 ];
 
-export function registerGuest(req: Request, res: Response): void {
+export function registerGuest(req: Request, res: Response, guests: Collection<any>): void {
   if (!req.body.firstname || !req.body.lastname) {
     res.status(BAD_REQUEST).send('Missing mandatory member(s)');
   } else {
@@ -14,7 +14,7 @@ export function registerGuest(req: Request, res: Response): void {
     if (req.body.id) {
       newGuestID = parseInt(req.body.id);
     } else {
-      newGuestID = guests.length + 1;
+      newGuestID = guests.count() + 1;
     }
 
     let email ="";
@@ -24,13 +24,12 @@ export function registerGuest(req: Request, res: Response): void {
 
     if (!newGuestID) {
       res.status(BAD_REQUEST).send('ID has to be a numeric value');
-    } else {
-      const newGuest: IGuest = {
-        id: newGuestID,
-        firstname: req.body.firstname, lastname: req.body.lastname, email: email
-      };
-      guests.push(newGuest);
-      res.status(CREATED).send(newGuest);
+    } else if(guests.count() >= 10){
+      res.status(BAD_REQUEST).send('Sorry, we can\'t invite more than 10 people :/ :/');
+    }else{
+        let newGuest = {id: newGuestID,firstName: req.body.firstname, lastName: req.body.lastname, email: email}
+        newGuest = guests.insert(newGuest);
+        res.status(CREATED).send(newGuest);
     }
   }
 }

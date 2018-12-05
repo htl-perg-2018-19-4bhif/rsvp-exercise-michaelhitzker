@@ -1,5 +1,5 @@
 ###
-POST http://localhost:8080/register HTTP/1.1
+POST http://localhost:8081/register/ HTTP/1.1
 Accept: application/json
 Content-Type: application/json
 
@@ -10,15 +10,15 @@ Content-Type: application/json
 }
 
 ###
-GET http://localhost:8080/party HTTP/1.1
+GET http://localhost:8081/party/ HTTP/1.1
 Accept: application/json
 
 ###
-GET http://localhost:8080/guests HTTP/1.1
+GET http://localhost:8081/guests/ HTTP/1.1
 Accept: application/json
-Authorization: Basic admin:admin
+Authorization: admin:supersecret
 
 ###
-GET http://localhost:8080/guests HTTP/1.1
+GET http://localhost:8081/guests/ HTTP/1.1
 Accept: application/json
-Authorization: Basic YWRtaW46UEBzc3cwcmQh
+Authorization: Basic YWRtaW46c3VwZXJzZWNyZXQ=

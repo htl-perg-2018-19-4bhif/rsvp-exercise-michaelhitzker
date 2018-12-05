@@ -1,3 +1,5 @@
+import * as loki from 'lokijs';
+
 export interface IParty {
   id: number;
   title: string;
@@ -12,4 +14,4 @@ export interface IGuest{
   email?: string;
 }
 
-export const party: IParty= {id: 1, title:"New Year's Eve Party", location:"Secret", date:"2018-12-31"};
+export const party: IParty = {id: 1, title:"Xmas Party", location:"Empire State Building", date:"2018-12-23"};
